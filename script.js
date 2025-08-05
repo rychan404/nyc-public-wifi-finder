@@ -8,6 +8,13 @@ let address = {
     zip : ''
 }
 
+let API_KEY;
+
+export async function onRequest(context) {
+  const { env } = context;
+  API_KEY = env.GEOCODIO_API_KEY;
+}
+
 myForm.addEventListener('submit', function(event) {
     event.preventDefault();
     getAddress();
