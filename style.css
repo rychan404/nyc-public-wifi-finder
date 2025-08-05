@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100dvh;
+    font-size: 1.5rem;
+    font-family: monospace;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+main {
+    grid-column-start: 2;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5rem;
+}
+
+#title {
+    text-align: center;
+}
+#title p {
+    margin: 0.25rem 0 2rem 0;
+    font-size: 1.25rem;
+}
+
+input {
+    padding: 0.25rem;
+    width: 25rem;
+}
+
+/*
+main {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    margin-top: 5rem;
+}
+*/
+/*
+form {
+    margin-right: 28rem;
+    margin-top: 7rem;
+}
+*/
