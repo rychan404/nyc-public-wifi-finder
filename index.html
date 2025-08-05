@@ -12,10 +12,10 @@
         <h1>NYC Public Wifi Finder</h1>
         <p>📶 Find the nearest public NYC wifi hotspot near you! 🏙️</p>
       </article>
-      <article id="form">
-        <form action="">
-          <label for="street-address">Street Address</label><br />
-          <input type="text" id="street-address" name="street-address" /><br />
+      <article>
+        <form id="form" action="">
+          <label for="street">Street Address</label><br />
+          <input type="text" id="street" name="street" /><br />
           <label for="city">City</label><br />
           <input type="text" id="city" name="city" /><br />
           <label for="state">State</label><br />
@@ -72,11 +72,13 @@
             <option value="WY">Wyoming</option>
             <option value="DC">District of Columbia</option></select
           ><br />
-          <label for="zip-postal-code">ZIP or postal code</label><br />
-          <input type="text" id="zip-postal-code" name="zip-postal-code" />
+          <label for="zip">ZIP or postal code</label><br />
+          <input type="text" id="zip" name="zip" /><br />
+          <button type="submit" class="submit-btn">Submit</button>
         </form>
-        <button>Submit</button>
       </article>
     </main>
+    <script type="text/javascript" src="api_key.js"></script>
+    <script type="text/javascript" src="script.js"></script>
   </body>
 </html>
