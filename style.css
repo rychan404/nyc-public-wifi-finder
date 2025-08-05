@@ -26,10 +26,22 @@ main {
     font-size: 1.25rem;
 }
 
-input {
-    padding: 0.25rem;
-    width: 25rem;
+input, select {
+    font-family: monospace;
+    font-size: 1rem;
+    padding: 0.3rem;
+    width: 15rem;
+    margin-bottom: 1rem;
+    border: 0.125rem black solid;
 }
+
+button {
+    font-size: 1rem;
+    font-family: monospace;     
+    padding: 0.5rem 2rem;
+    border: 0.125rem black solid;
+}
+
 
 /*
 main {
