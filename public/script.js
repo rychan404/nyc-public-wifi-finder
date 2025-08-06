@@ -5,19 +5,16 @@ let address = {
     street : '',
     city : '',
     state : '',
-    zip : ''
+    postalcode : '',
+    format : 'json'
 }
 myForm.addEventListener('submit', function(event) {
     event.preventDefault();
     getAddress();
     let formattedAddress = formatAddress();
-    console.log(formattedAddress);
-    fetch('/geocode')
-    .then(res => res.json())
-    .then(data => {
-      console.log('Geocode result:', data);
-     });
+    geeocode(formattedAddress);
 });
+
 function getAddress() {
   for (const addressPart of myForm.elements) {
       if (addressPart.type === 'text' || addressPart.id === 'state') {
@@ -26,8 +23,16 @@ function getAddress() {
   }
 }
 function formatAddress() {
-  return `${address.street}, ${address.city}, ${address.state} ${address.zip}`;
+  return `${address.street}, ${address.city}, ${address.state} ${address.postalcode}`;
 }
+
+async function geeocode(formattedAddress) {
+  const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(formattedAddress)}&format=json`;
+  const res = await fetch(url);
+  const data = await res.json();
+  console.log(JSON.stringify(data[0], null, 2));
+}
+/*
 function geocode(formattedAddress) {
   fetch(`https://api.geocod.io/v1.9/geocode?q=${encodeURIComponent(formattedAddress)}&api_key=${API_KEY}`)
     .then(response => response.json())
@@ -42,3 +47,4 @@ function geocode(formattedAddress) {
     })
     .catch(error => console.error(error));
 }
+*/
