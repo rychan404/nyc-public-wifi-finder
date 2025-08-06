@@ -7,7 +7,6 @@ let address = {
     state : '',
     zip : ''
 }
-
 myForm.addEventListener('submit', function(event) {
     event.preventDefault();
     getAddress();
@@ -25,17 +24,13 @@ function formatAddress() {
   return `${address.street}, ${address.city}, ${address.state} ${address.zip}`;
 }
 function geocode(formattedAddress) {
-  fetch('/api-key', {
+  fetch('/geocode', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      address : formattedAddress
-    })
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ formattedAddress })
   })
   .then(res => res.json())
   .then(data => {
-    console.log('Response from backend:', data);
+    console.log('Geocode result:', data);
   });
 }
