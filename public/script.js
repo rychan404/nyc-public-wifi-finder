@@ -2,17 +2,27 @@
 const myForm = document.getElementById('form');
  
 let address = {
-    street : '',
-    city : '',
-    state : '',
-    postalcode : '',
-    format : 'json'
+    street: '',
+    city: '',
+    state: '',
+    postalcode: ''
 }
-myForm.addEventListener('submit', function(event) {
+myForm.addEventListener('submit', async function(event) {
     event.preventDefault();
     getAddress();
-    let formattedAddress = formatAddress();
-    geeocode(formattedAddress);
+    const formattedAddress = formatAddress();
+    const coordinates = await geocode(formattedAddress);
+    const dataset = await getDataset();
+    const distances = [];
+    for (let place of dataset) {
+      const lat = takeDifference(place[18], coordinates[0])**2;
+      const lon = takeDifference(place[19], coordinates[1])**2;
+      const distance = findDistance(lat, lon);
+      distances.push(distance);
+    }
+    const minDistance = Math.min(...distances);
+    const place = dataset[distances.indexOf(minDistance)];
+    console.log(place);
 });
 
 function getAddress() {
@@ -25,26 +35,24 @@ function getAddress() {
 function formatAddress() {
   return `${address.street}, ${address.city}, ${address.state} ${address.postalcode}`;
 }
+function takeDifference(value1, value2) {
+  return Math.abs(parseFloat((value1 - value2).toFixed(17)));
+}
 
-async function geeocode(formattedAddress) {
+function findDistance(value1, value2) {
+  return parseFloat(Math.sqrt(parseFloat((value1 + value2).toFixed(17)).toFixed(17)));
+}
+
+async function geocode(formattedAddress) {
   const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(formattedAddress)}&format=json`;
   const res = await fetch(url);
   const data = await res.json();
-  console.log(JSON.stringify(data[0], null, 2));
+  return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
 }
-/*
-function geocode(formattedAddress) {
-  fetch(`https://api.geocod.io/v1.9/geocode?q=${encodeURIComponent(formattedAddress)}&api_key=${API_KEY}`)
-    .then(response => response.json())
-    .then(data => {
-      const results = data.results;
-      if (results.length) {
-        const { lat, lng } = results[0].location;
-        console.log(`${lat}, ${lng}`);
-      } else {
-        console.log('No location results found');
-      }
-    })
-    .catch(error => console.error(error));
+
+async function getDataset() {
+  const url = 'https://data.cityofnewyork.us/api/views/npnk-wrj8/rows.json?accessType=DOWNLOAD'
+  const res = await fetch(url);
+  const data = await res.json();
+  return data.data;
 }
-*/
