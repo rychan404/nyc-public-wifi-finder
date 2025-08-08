@@ -42,6 +42,13 @@ button {
     border: 0.125rem black solid;
 }
 
+#finder {
+    display: flex;
+}
+
+#finder div {
+    margin-left: 5rem;
+}
 
 /*
 main {

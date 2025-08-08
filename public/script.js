@@ -1,7 +1,7 @@
 "use strict"
 const myForm = document.getElementById('form');
  
-let address = {
+const address = {
     street: '',
     city: '',
     state: '',
@@ -22,7 +22,15 @@ myForm.addEventListener('submit', async function(event) {
     }
     const minDistance = Math.min(...distances);
     const place = dataset[distances.indexOf(minDistance)];
-    console.log(place);
+
+    const placeInfo = {
+      title: document.querySelector('#place h2'),
+      wifiName: document.querySelector('#place h3'),
+      location: document.querySelector('#place p')
+    };
+    placeInfo.title.innerHTML = place[10];
+    placeInfo.wifiName.innerHTML = place[17];
+    placeInfo.location.innerHTML = `Located ${place[11]} in ${place[12]}`;
 });
 
 function getAddress() {
