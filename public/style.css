@@ -46,8 +46,14 @@ button {
     display: flex;
 }
 
-#finder div {
+#place {
     margin-left: 5rem;
+}
+
+#map {
+    height: 500px;
+    width: 500px;
+    margin: 0;
 }
 
 /*
