@@ -31,9 +31,11 @@ myForm.addEventListener('submit', async function(event) {
     const placeInfo = {
       title: document.querySelector('#place h2'),
       wifiName: document.querySelector('#place h3'),
-      location: document.querySelector('#place p')
+      location: document.querySelector('#place p'),
+      image: document.querySelector('#place img')
     };
-
+    
+    placeInfo.image.src = await getWikipedia(place[10]);
     placeInfo.title.innerHTML = place[10];
     placeInfo.wifiName.innerHTML = place[17];
     placeInfo.location.innerHTML = `Located ${place[11]} in ${place[12]}`;
@@ -41,13 +43,11 @@ myForm.addEventListener('submit', async function(event) {
     const placeLon = parseFloat(place[19]);
     let map = L.map('map').setView([placeLat, placeLon], 15);
     let marker = L.marker([placeLat, placeLon]).addTo(map);
-    const formattedPlaceName = formatPlaceName(place[10]);
-    marker.bindPopup(`<a href="https://www.google.com/maps/search/?api=1&query=${formattedPlaceName}" target="_blank">Open in Google Maps</a>`).openPopup();
+    marker.bindPopup(`<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place[10])}" target="_blank">Open in Google Maps</a>`).openPopup();
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       }).addTo(map);
-    // reverseGeocode(place[10]);
 });
 
 function getAddress() {
@@ -60,17 +60,7 @@ function getAddress() {
 function formatAddress() {
   return `${address.street}, ${address.city}, ${address.state} ${address.postalcode}`;
 }
-function formatPlaceName(name) {
-  let formattedName = '';
-  for (let char of name) {
-    if (char === ' ') {
-      formattedName += '+';
-    } else {
-      formattedName += char;
-    }
-  }
-  return formattedName;
-}
+
 function takeDifference(value1, value2) {
   return Math.abs(parseFloat((value1 - value2).toFixed(17)));
 }
@@ -95,8 +85,29 @@ async function reverseGeocode(placeName) {
 */
 
 async function getDataset() {
-  const url = 'https://data.cityofnewyork.us/api/views/npnk-wrj8/rows.json?accessType=DOWNLOAD'
+  const url = 'https://data.cityofnewyork.us/api/views/npnk-wrj8/rows.json?accessType=DOWNLOAD';
   const res = await fetch(url);
   const data = await res.json();
   return data.data;
+}
+
+async function getWikipedia(place) {
+  if (place.startsWith("Wolfes")) {
+    place = "Wolfe's Pond Park";
+  }
+  const url = `https://en.wikipedia.org/w/api.php?action=parse&page=${encodeURIComponent(place)}&format=json&origin=*`;
+  const res = await fetch(url);
+  const data = await res.json();
+  const wikiHTML = data.parse.text["*"];
+  let imageURL = wikiHTML.substring(wikiHTML.indexOf('<img src="') + '<img src="'.length);
+  let index = 0;
+  for (let char of imageURL) {
+    if (char === '"') {
+      break;    
+    } else {
+      index++;
+    }
+  }
+  imageURL = imageURL.substring(0, index);
+  return imageURL;
 }
