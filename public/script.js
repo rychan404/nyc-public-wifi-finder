@@ -78,14 +78,6 @@ async function geocode(formattedAddress, errorMessage) {
   }
   return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
 }
-/*
-async function reverseGeocode(placeName) {
-  let url = `https://nominatim.openstreetmap.org/search?q=${placeName}&extratags=1&format=json`;
-  let res = await fetch(url);
-  let data = await res.json();
-  console.log(data);
-}
-*/
 
 async function getDataset() {
   const url = 'https://data.cityofnewyork.us/api/views/npnk-wrj8/rows.json?accessType=DOWNLOAD';
@@ -114,5 +106,17 @@ async function getWikipedia(place) {
     }
   }
   imageURL = imageURL.substring(0, index);
+  const pxIndex1 = imageURL.indexOf('px') - 3;
+  const pxIndex2 = imageURL.indexOf('px') - 4; 
+  if (isNumber(imageURL.charAt(pxIndex1))) {
+    imageURL = imageURL.substring(0, pxIndex1) + '500px' + imageURL.substring(pxIndex1 + 5);
+  } else {
+    imageURL = imageURL.substring(0, pxIndex2) + '500px' + imageURL.substring(pxIndex2 + 5);
+  }
+  console.log(imageURL);
   return imageURL;
+}
+
+function isNumber(string) {
+  return string == parseInt(string);
 }
