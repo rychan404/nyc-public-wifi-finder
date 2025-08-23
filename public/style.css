@@ -63,6 +63,7 @@ input, select {
     border: 0.125rem black solid;
     border-radius: 0;
     background-color: #F5F2E8;
+    color: black;
 }
 
 form {
@@ -79,6 +80,7 @@ label {
 label span {
     background-color: #f6cb2f;
     padding: 0.25rem 0.25rem 0 0.25rem;
+    margin: 0;
 }
 
 button {
