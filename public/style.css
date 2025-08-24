@@ -15,44 +15,50 @@
 }
 
 body {
+    display: flex;
+    justify-content: center;
     min-height: 100dvh;
+    min-width: 100dvw;
     font-size: 1.5rem;
     font-family: 'Gorton Regular', monospace;
     background: url(./nyc.gif) no-repeat center;
     background-size: cover;
 }
 main {
-    margin-top: 5rem;
+    margin: 5rem 0;
 }
-#title { 
+#title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     text-align: center;
-    margin-bottom: 2rem;
 }
 
-#title h1 { 
+#title h1, #title h2 {
+    word-spacing: -1.5ch;
     font-family: 'Gorton Bold', monospace;
-    font-size: clamp(2rem, 7rem, 25vw);
+    font-size: clamp(3.5rem, 25vw, 7rem);
     color: white;
-    line-height: 5.5rem;
-    text-shadow: calc(1rem/16 * 6) calc(1rem/16 * 6) black;
-    word-spacing: -5rem;
+    line-height: 1.25ch;
+    text-shadow: 0.035em 0.035em black;
 }
-#public-wifi-finder {
-    display: block;
-    font-family: 'Gorton Bold', monospace;
-    font-size: clamp(2rem, 5rem, 25vw);
+
+#title h2 {
+    text-shadow: 0.07em 0.07em black;
+    font-size: clamp(1.5rem, 9vw, 4.5rem);
 }
 
 #title p {
-    display: inline;
-    margin: 0.25rem 0 2rem 0;
-    font-size: clamp(1rem, 1.25rem, 10vw);
+    word-spacing: -1ch;
+    margin: 1rem 0 2rem 0;
+    font-size: clamp(0.75rem, 5vw, 1.25rem);
+    width: min(100%, 100vw);
     font-family: 'Gorton Bold', monospace;
-    word-spacing: -1rem;
     color: black;
     background-color: #F5F2E8;
     padding: 0.2rem;
-}
+}   
 
 input, select {
     font-family: Arial, Helvetica, sans-serif;
@@ -66,21 +72,16 @@ input, select {
     color: black;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-}
-
 label {
     font-family: 'Gorton Bold', monospace;
-    word-spacing: -1.5rem;
+    word-spacing: -1.5ch;
     color: black;
+    font-size: 1.25rem;
 }
 
 label span {
     background-color: #f6cb2f;
     padding: 0.25rem 0.25rem 0 0.25rem;
-    margin: 0;
 }
 
 button {
@@ -94,17 +95,18 @@ button {
     color: black;
 }
 
+button:active {
+    background-color: white;
+}
+
 #finder {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
 }
 
 #place {
     display: flex;
     flex-direction: column;
-    margin-left: 2rem;
-    margin-right: 2rem;
+    margin: 0 min(2rem, 2vw);
 }
 
 #place h2 {
@@ -122,25 +124,24 @@ button {
 }
 
 #map {
-    width: 50.5rem;
-    height: 31.25rem;
-    margin: 0 2rem 0 0;
+    width: min(90vw, 50.5rem);
+    height: min(70vw, 31.25rem);
 }
 #heart {
     color:#ED2C23;
 }
-@media only screen and (max-width: 875px) {
-    #place {
-        max-width: 100dvw;
+
+@media only screen and (max-width: 768px) {
+    #finder {
+        flex-direction: column;
+    }
+    form {
+        margin: auto;
         text-align: center;
-        align-items: center;
     }
-    button {
-        align-self: center;    
-    }
-    #map {
-        width: 35rem;
-        margin: 0;
+    #place {
+        margin: 2rem auto auto auto;
+        text-align: center;
     }
 }
 /*
