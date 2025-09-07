@@ -1,0 +1,187 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Gorton Bold';
+    src: url(../fonts/OpenGorton-Bold.otf);
+}
+
+@font-face {
+    font-family: 'Gorton Regular';
+    src: url(../fonts/OpenGorton-Regular.otf);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    font-size: 1.5rem;
+    font-family: 'Gorton Regular', monospace;
+    background-image: url(../bkg/sky.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    position: relative;
+}
+
+main {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 5rem 0;
+}
+
+.foreground {
+    --width: 100%;
+    position: fixed;
+    left: 50%;
+    bottom: 0%;    
+    transform: translate(-50%);
+    width: var(--width);
+}
+
+#title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+#title h1, #title h2 {
+    word-spacing: -1.5ch;
+    font-family: 'Gorton Bold', monospace;
+    font-size: clamp(3.5rem, 25vw, 7rem);
+    color: white;
+    line-height: 1.25ch;
+    text-shadow: 0.035em 0.035em black;
+}
+
+#title h2 {
+    text-shadow: 0.07em 0.07em black;
+    font-size: clamp(1.5rem, 9vw, 4.5rem);
+}
+
+#title p {
+    word-spacing: -1ch;
+    margin: 1rem 0 2rem 0;
+    font-size: clamp(0.75rem, 5vw, 1.25rem);
+    width: min(100%, 100vw);
+    font-family: 'Gorton Bold', monospace;
+    color: black;
+    background-color: #F5F2E8;
+    padding: 0.2rem;
+}   
+
+input, select {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    padding: 0.3rem;
+    width: 15rem;
+    margin-bottom: 1rem;
+    border: 0.125rem black solid;
+    border-radius: 0;
+    background-color: #F5F2E8;
+    color: black;
+}
+
+label {
+    font-family: 'Gorton Bold', monospace;
+    word-spacing: -1.5ch;
+    color: black;
+    font-size: 1.25rem;
+}
+
+label span {
+    background-color: #f6cb2f;
+    padding: 0.25rem 0.25rem 0 0.25rem;
+}
+
+button {
+    align-self: flex-start;
+    font-size: 1rem;
+    font-family: 'Gorton Regular', monospace;
+    padding: 0.5rem 2rem;
+    border: 0.125rem black solid;
+    border-radius: 0;
+    background-color: #F5F2E8;
+    color: black;
+}
+
+button:active {
+    background-color: white;
+}
+
+#finder {
+    display: flex;
+}
+
+#place {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 min(2rem, 2vw);
+}
+
+#place h2 {
+    font-size: 2rem;
+}
+
+#place h3 {
+    font-size: 1.5rem;
+}
+
+#place p {
+    font-size: 1rem;
+}
+
+#place img {
+    width: min(30rem, 80vw);
+}
+
+#map-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#map {
+    width: min(90vw, 50.5rem);
+    height: min(70vw, 31.25rem);
+}
+#heart {
+    color:#ED2C23;
+}
+
+@media only screen and (max-width: 768px) {
+    #finder {
+        flex-direction: column;
+    }
+    form {
+        margin: auto;
+        text-align: center;
+    }
+    #place {
+        margin: 2rem auto auto auto;
+        text-align: center;
+    }
+}
+/*
+main {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    margin-top: 5rem;
+}
+*/
+/*
+form {
+    margin-right: 28rem;
+    margin-top: 7rem;
+}
+*/
